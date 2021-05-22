@@ -1,0 +1,45 @@
+.bg-light {
+    background-color: #151414!important;
+}
+
+
+.navbar-light .navbar-nav .nav-link {
+    color: white;
+}
+
+.btn-outline-dark {
+    color: white;
+    border-color: white;
+}
+.btn-outline-dark:hover {
+    color: #fff;
+    background-color: rgb(233, 73, 73);
+    border-color: rgb(233, 73, 73);
+}
+
+.navbar-light .navbar-nav .nav-link {
+    position: relative;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.navbar-light .navbar-nav .nav-link:after {
+    display: block;
+    content: '';
+    border-bottom: solid 3px rgb(233, 73, 73) ;
+    transform: scaleX(0);
+    transition: transform 250ms ease-in-out;
+    transform-origin: 100% 50%
+}
+
+.navbar-light .navbar-nav .nav-link:hover:after {
+    transform: scaleX(1);
+    transform-origin: 0 50%;
+}
+
+.navbar-light .navbar-brand {
+    color: rgb(233, 73, 73);
+}
+.navbar-light .navbar-brand:focus, .navbar-light .navbar-brand:hover,.navbar-light .navbar-nav .nav-link:focus, .navbar-light .navbar-nav .nav-link:hover{
+    color: rgb(233, 73, 73);
+}

@@ -1,0 +1,14 @@
+svg{
+    width: 280px;
+    height: 100px;
+    display:inline-block;
+}
+svg text{
+    font-size: 50px;
+}
+.loader div{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 100px);
+}
