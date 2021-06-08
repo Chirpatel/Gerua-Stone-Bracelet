@@ -1,231 +1,120 @@
-import React from 'react'
+import {React, useState,useEffect} from 'react'
+import ProductView from '../ProductView/ProductView'
+import getApi from '../../API/getApi'
 import './Home.css'
+
 function Home() {
+    const [data,setData] = useState([]);
+    const [universalData, setUniversalData] = useState([]);
+    const [categories,setCategories] = useState({});
+    const [filterCatg, setFilterCatg] = useState({});
+
+    const setCategory = (data) =>{
+        let cat = {};
+        let fCat ={}
+        if(data)
+        // eslint-disable-next-line array-callback-return
+        data.map((prod)=>{
+            // eslint-disable-next-line array-callback-return
+            prod.categories.map((catg)=>{
+                if(cat[catg]===undefined){
+                    cat[catg]=1;
+                    fCat[catg]=true;
+                }else{
+                    cat[catg]+=1;
+                }
+            })
+        })
+        console.log(cat);
+        setFilterCatg(fCat)
+        setCategories(cat);
+    }
+    const checkCategory = (filterCatgs,catg) =>{
+        let catgs = Object.keys(filterCatgs).filter(catg => filterCatgs[catg]);
+        return catgs.includes(catg);
+    }
+    const filterData = (filterCatgs)=>{
+        if(universalData)
+            setData(universalData.filter(prod => prod.categories.some((catg)=>{return checkCategory(filterCatgs,catg)})))
+        
+    }
+    
+    useEffect(() => {
+        const pageData = async(page,pageSize) =>{
+            return await getApi(`https://gerua-api.vercel.app/data?page=${page}`);
+        }
+        const dataPageCall = async (totalPage) =>{
+            let page = 2;
+            let temp =[];
+            while(page<=totalPage){
+                temp =[...temp,...(await pageData(page)).data];
+                page+=1;
+            }
+            setUniversalData((prevState)=>{console.log(prevState);return [...prevState, ...temp]})
+            setData((prevState)=>{console.log(prevState);return [...prevState, ...temp]})
+            setCategory([...universalData, ...temp])
+        }
+        const dataCall = async () => {
+            let temp = await getApi("https://gerua-api.vercel.app/data");
+            console.log(temp);
+            setUniversalData(temp.data)
+            setData(temp.data)
+            setCategory(temp.data)
+            if(temp.page<temp.totalPage){
+                dataPageCall(temp.totalPage);
+            }
+        }
+        dataCall();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
+    const addChecked=(catg)=>{
+        let tempcatg= {};
+        tempcatg[catg]=!filterCatg[catg]
+        setFilterCatg({...filterCatg, ...tempcatg})
+        filterData({...filterCatg, ...tempcatg})
+    }
+
+
     return (
+        
         <div className="container-fluid mt-5 mb-5">
-            <div className="row g-2">
+                <div className="row g-2">
                 <div className="col-md-3">
                     <div className="t-products p-2">
-                        <h6 className="text-uppercase">Computer & Periferals</h6>
+                        <h6 className="text-uppercase">Categories</h6>
                         <div className="p-lists">
-                            <div className="d-flex justify-content-between mt-2"> <span>Laptops</span> <span>23</span> </div>
-                            <div className="d-flex justify-content-between mt-2"> <span>Desktops</span> <span>46</span> </div>
-                            <div className="d-flex justify-content-between mt-2"> <span>Monitors</span> <span>13</span> </div>
-                            <div className="d-flex justify-content-between mt-2"> <span>Mouse</span> <span>33</span> </div>
-                            <div className="d-flex justify-content-between mt-2"> <span>Keyboard</span> <span>12</span> </div>
-                            <div className="d-flex justify-content-between mt-2"> <span>Printer</span> <span>53</span> </div>
-                            <div className="d-flex justify-content-between mt-2"> <span>Mobiles</span> <span>203</span> </div>
-                            <div className="d-flex justify-content-between mt-2"> <span>CPU</span> <span>23</span> </div>
+                        {categories &&
+                            Object.keys(categories).map((catg,key)=>{
+                                return <div key={key} className="d-flex justify-content-between mt-2"> <span>{catg}</span> <span>{categories[catg]}</span> </div>
+                            })
+                        }
                         </div>
                     </div>
                     <div className="processor p-2">
                         <div className="heading d-flex justify-content-between align-items-center">
-                            <h6 className="text-uppercase">Processor</h6> <span>--</span>
+                            <h6 className="text-uppercase">Categories</h6> <span>--</span>
                         </div>
-                        <div className="d-flex justify-content-between mt-2">
-                            <div className="form-check"> <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" /> <label className="form-check-label" htmlFor="flexCheckDefault"> Intel Core i7 </label> </div> <span>3</span>
-                        </div>
-                        <div className="d-flex justify-content-between mt-2">
-                            <div className="form-check"> <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked" /> <label className="form-check-label" htmlFor="flexCheckChecked"> Intel Core i6 </label> </div> <span>4</span>
-                        </div>
-                        <div className="d-flex justify-content-between mt-2">
-                            <div className="form-check"> <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked" /> <label className="form-check-label" htmlFor="flexCheckChecked"> Intel Core i3 </label> </div> <span>14</span>
-                        </div>
-                        <div className="d-flex justify-content-between mt-2">
-                            <div className="form-check"> <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked" /> <label className="form-check-label" htmlFor="flexCheckChecked"> Intel Centron </label> </div> <span>8</span>
-                        </div>
-                        <div className="d-flex justify-content-between mt-2">
-                            <div className="form-check"> <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked" /> <label className="form-check-label" htmlFor="flexCheckChecked"> Intel Pentinum </label> </div> <span>14</span>
-                        </div>
-                    </div>
-                    <div className="brand p-2">
-                        <div className="heading d-flex justify-content-between align-items-center">
-                            <h6 className="text-uppercase">Brand</h6> <span>--</span>
-                        </div>
-                        <div className="d-flex justify-content-between mt-2">
-                            <div className="form-check"> <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" /> <label className="form-check-label" htmlFor="flexCheckDefault"> Apple </label> </div> <span>13</span>
-                        </div>
-                        <div className="d-flex justify-content-between mt-2">
-                            <div className="form-check"> <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked" /> <label className="form-check-label" htmlFor="flexCheckChecked"> Asus </label> </div> <span>4</span>
-                        </div>
-                        <div className="d-flex justify-content-between mt-2">
-                            <div className="form-check"> <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked" /> <label className="form-check-label" htmlFor="flexCheckChecked"> Dell </label> </div> <span>24</span>
-                        </div>
-                        <div className="d-flex justify-content-between mt-2">
-                            <div className="form-check"> <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked" /> <label className="form-check-label" htmlFor="flexCheckChecked"> Lenovo </label> </div> <span>18</span>
-                        </div>
-                        <div className="d-flex justify-content-between mt-2">
-                            <div className="form-check"> <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked" /> <label className="form-check-label" htmlFor="flexCheckChecked"> Acer </label> </div> <span>44</span>
-                        </div>
-                    </div>
-                    <div className="type p-2 mb-2">
-                        <div className="heading d-flex justify-content-between align-items-center">
-                            <h6 className="text-uppercase">Type</h6> <span>--</span>
-                        </div>
-                        <div className="d-flex justify-content-between mt-2">
-                            <div className="form-check"> <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" /> <label className="form-check-label" htmlFor="flexCheckDefault"> Hybrid </label> </div> <span>23</span>
-                        </div>
-                        <div className="d-flex justify-content-between mt-2">
-                            <div className="form-check"> <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked" /> <label className="form-check-label" htmlFor="flexCheckChecked"> Laptop </label> </div> <span>24</span>
-                        </div>
-                        <div className="d-flex justify-content-between mt-2">
-                            <div className="form-check"> <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked" /> <label className="form-check-label" htmlFor="flexCheckChecked"> Desktop </label> </div> <span>14</span>
-                        </div>
-                        <div className="d-flex justify-content-between mt-2">
-                            <div className="form-check"> <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked" /> <label className="form-check-label" htmlFor="flexCheckChecked"> Touch </label> </div> <span>28</span>
-                        </div>
-                        <div className="d-flex justify-content-between mt-2">
-                            <div className="form-check"> <input className="form-check-input" type="checkbox" value="" id="flexCheckChecked" /> <label className="form-check-label" htmlFor="flexCheckChecked"> Tablets </label> </div> <span>44</span>
-                        </div>
+                        {categories &&
+                            Object.keys(categories).map((catg,key)=>{
+                                return (
+                                    <div key={key} className="d-flex justify-content-between mt-2">
+                                        <div className="form-check"> <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" onChange={() => {addChecked(catg)}} defaultChecked={filterCatg[catg]}/> <label className="form-check-label" htmlFor="flexCheckDefault"> {catg} </label> </div> <span>{categories[catg]}</span>
+                                    </div>
+                                )
+                            })
+                        }
                     </div>
                 </div>
                 <div className="col-md-9">
                     <div className="row g-2">
-                        <div className="col-md-4">
-                            <div className="product py-4"> <span className="off bg-success">-25% OFF</span>
-                                <div className="text-center"> <img alt="" src="https://i.imgur.com/nOFet9u.jpg" width="200" /> </div>
-                                <div className="about text-center">
-                                    <h5>XRD Active Shoes</h5> <span>$1,999.99</span>
-                                </div>
-                                <div className="cart-button mt-3 px-2 d-flex justify-content-between align-items-center"> <button className="btn btn-primary text-uppercase">Add to cart</button>
-                                    <div className="add"> <span className="product_fav"><i className="fa fa-heart-o"></i></span> <span className="product_fav"><i className="fa fa-opencart"></i></span> </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-md-4">
-                            <div className="product py-4"> <span className="off bg-success">-25% OFF</span>
-                                <div className="text-center"> <img alt="" src="https://i.imgur.com/nOFet9u.jpg" width="200" /> </div>
-                                <div className="about text-center">
-                                    <h5>XRD Active Shoes</h5> <span>$1,999.99</span>
-                                </div>
-                                <div className="cart-button mt-3 px-2 d-flex justify-content-between align-items-center"> <button className="btn btn-primary text-uppercase">Add to cart</button>
-                                    <div className="add"> <span className="product_fav"><i className="fa fa-heart-o"></i></span> <span className="product_fav"><i className="fa fa-opencart"></i></span> </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-md-4">
-                            <div className="product py-4"> <span className="off bg-success">-25% OFF</span>
-                                <div className="text-center"> <img alt="" src="https://i.imgur.com/nOFet9u.jpg" width="200" /> </div>
-                                <div className="about text-center">
-                                    <h5>XRD Active Shoes</h5> <span>$1,999.99</span>
-                                </div>
-                                <div className="cart-button mt-3 px-2 d-flex justify-content-between align-items-center"> <button className="btn btn-primary text-uppercase">Add to cart</button>
-                                    <div className="add"> <span className="product_fav"><i className="fa fa-heart-o"></i></span> <span className="product_fav"><i className="fa fa-opencart"></i></span> </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-md-4">
-                            <div className="product py-4"> <span className="off bg-success">-25% OFF</span>
-                                <div className="text-center"> <img alt="" src="https://i.imgur.com/nOFet9u.jpg" width="200" /> </div>
-                                <div className="about text-center">
-                                    <h5>XRD Active Shoes</h5> <span>$1,999.99</span>
-                                </div>
-                                <div className="cart-button mt-3 px-2 d-flex justify-content-between align-items-center"> <button className="btn btn-primary text-uppercase">Add to cart</button>
-                                    <div className="add"> <span className="product_fav"><i className="fa fa-heart-o"></i></span> <span className="product_fav"><i className="fa fa-opencart"></i></span> </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-md-4">
-                            <div className="product py-4"> <span className="off bg-success">-25% OFF</span>
-                                <div className="text-center"> <img alt="" src="https://i.imgur.com/nOFet9u.jpg" width="200" /> </div>
-                                <div className="about text-center">
-                                    <h5>XRD Active Shoes</h5> <span>$1,999.99</span>
-                                </div>
-                                <div className="cart-button mt-3 px-2 d-flex justify-content-between align-items-center"> <button className="btn btn-primary text-uppercase">Add to cart</button>
-                                    <div className="add"> <span className="product_fav"><i className="fa fa-heart-o"></i></span> <span className="product_fav"><i className="fa fa-opencart"></i></span> </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-md-4">
-                            <div className="product py-4"> <span className="off bg-warning">SALE</span>
-                                <div className="text-center"> <img alt="" src="https://i.imgur.com/VY0R9aV.png" width="200" /> </div>
-                                <div className="about text-center">
-                                    <h5>Hygen Smart watch </h5> <span>$123.43</span>
-                                </div>
-                                <div className="cart-button mt-3 px-2 d-flex justify-content-between align-items-center"> <button className="btn btn-primary text-uppercase">Add to cart</button>
-                                    <div className="add"> <span className="product_fav"><i className="fa fa-heart-o"></i></span> <span className="product_fav"><i className="fa fa-opencart"></i></span> </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-md-4">
-                            <div className="product py-4">
-                                <div className="text-center"> <img alt="" src="https://i.imgur.com/PSGrLdz.jpg" width="200" /> </div>
-                                <div className="about text-center">
-                                    <h5>Acer surface book 2.5</h5> <span>$1,999.99</span>
-                                </div>
-                                <div className="cart-button mt-3 px-2 d-flex justify-content-between align-items-center"> <button className="btn btn-primary text-uppercase">Add to cart</button>
-                                    <div className="add"> <span className="product_fav"><i className="fa fa-heart-o"></i></span> <span className="product_fav"><i className="fa fa-opencart"></i></span> </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-md-4">
-                            <div className="product py-4"> <span className="off bg-success">-10% OFF</span>
-                                <div className="text-center"> <img alt="" src="https://i.imgur.com/OdRSpXG.jpg" width="200" /> </div>
-                                <div className="about text-center">
-                                    <h5>Dell XPS Surface</h5> <span>$1,245.89</span>
-                                </div>
-                                <div className="cart-button mt-3 px-2 d-flex justify-content-between align-items-center"> <button className="btn btn-primary text-uppercase">Add to cart</button>
-                                    <div className="add"> <span className="product_fav"><i className="fa fa-heart-o"></i></span> <span className="product_fav"><i className="fa fa-opencart"></i></span> </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-md-4">
-                            <div className="product py-4">
-                                <span className="off bg-success">-25% OFF</span>
-                                <div className="text-center"> <img alt="" src="https://i.imgur.com/X2AwTCY.jpg" width="200" /> </div>
-                                <div className="about text-center">
-                                    <h5>Acer surface book 5.5</h5> <span>$2,999.99</span>
-                                </div>
-                                <div className="cart-button mt-3 px-2 d-flex justify-content-between align-items-center"> <button className="btn btn-primary text-uppercase">Add to cart</button>
-                                    <div className="add"> <span className="product_fav"><i className="fa fa-heart-o"></i></span> <span className="product_fav"><i className="fa fa-opencart"></i></span> </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-md-4">
-                            <div className="product py-4"> <span className="off bg-success">-5% OFF</span>
-                                <div className="text-center"> <img alt="" src="https://i.imgur.com/QQwcBpF.png" width="200" /> </div>
-                                <div className="about text-center">
-                                    <h5>Xps smart watch 5.0</h5> <span>$999.99</span>
-                                </div>
-                                <div className="cart-button mt-3 px-2 d-flex justify-content-between align-items-center"> <button className="btn btn-primary text-uppercase">Add to cart</button>
-                                    <div className="add"> <span className="product_fav"><i className="fa fa-heart-o"></i></span> <span className="product_fav"><i className="fa fa-opencart"></i></span> </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-md-4">
-                            <div className="product py-4"> <span className="off bg-warning">SALE</span>
-                                <div className="text-center"> <img alt="" src="https://i.imgur.com/PSGrLdz.jpg" width="200" /> </div>
-                                <div className="about text-center">
-                                    <h5>Acer surface book 8.5</h5> <span>$3,999.99</span>
-                                </div>
-                                <div className="cart-button mt-3 px-2 d-flex justify-content-between align-items-center"> <button className="btn btn-primary text-uppercase">Add to cart</button>
-                                    <div className="add"> <span className="product_fav"><i className="fa fa-heart-o"></i></span> <span className="product_fav"><i className="fa fa-opencart"></i></span> </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-md-4">
-                            <div className="product py-4">
-                                <div className="text-center"> <img alt="" src="https://i.imgur.com/m22OQy9.jpg" width="200" /> </div>
-                                <div className="about text-center">
-                                    <h5>Tyko Running shoes</h5> <span>$99.99</span>
-                                </div>
-                                <div className="cart-button mt-3 px-2 d-flex justify-content-between align-items-center"> <button className="btn btn-primary text-uppercase">Add to cart</button>
-                                    <div className="add"> <span className="product_fav"><i className="fa fa-heart-o"></i></span> <span className="product_fav"><i className="fa fa-opencart"></i></span> </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div className="col-md-4">
-                            <div className="product py-4">
-                                <div className="text-center"> <img alt="" src="https://i.imgur.com/OdRSpXG.jpg" width="200" /> </div>
-                                <div className="about text-center">
-                                    <h5>Dell surface book 5</h5> <span>$1,999.99</span>
-                                </div>
-                                <div className="cart-button mt-3 px-2 d-flex justify-content-between align-items-center"> <button className="btn btn-primary text-uppercase">Add to cart</button>
-                                    <div className="add"> <span className="product_fav"><i className="fa fa-heart-o"></i></span> <span className="product_fav"><i className="fa fa-opencart"></i></span> </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                        {data  && data.map((prod,index) => {
+                            return <ProductView key={index} data={{ src: prod.images.medImg, name: prod.name, price: prod.price }} />
+                        })
+
+                        }
+                        
+                    </div> 
                 </div>
             </div>
         </div>
