@@ -55,6 +55,9 @@ function Header() {
                             <Route path="/login">
                                 <Login />
                             </Route>
+                            <Route path="/login">
+                                <Login />
+                            </Route>
                             <Route path="/">
                                 <Home/>
                             </Route>

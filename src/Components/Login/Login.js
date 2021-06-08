@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import {React,useState,useEffect} from 'react'
 import postApi from '../API/postApi';
 import getApi from '../API/getApi'
@@ -117,6 +118,15 @@ function Login() {
                 }
             </div>
         </>
+=======
+import React from 'react'
+
+function Login() {
+    return (
+        <div>
+            login
+        </div>
+>>>>>>> 2c12c2d... .
     )
 }
 
