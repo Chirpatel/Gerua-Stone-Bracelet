@@ -23,6 +23,7 @@ import ContactUs from '../Body/ContactUs/ContactUs'
 import Home from '../Body/Home/Home'
 import NewArrivals from '../Body/NewArrivals/NewArrivals'
 import Footer from '../Footer/Footer'
+import Login from '../Login/Login'
 import './Header.css'
 
 
@@ -67,9 +68,13 @@ function Header() {
                             <Route path="/newarrivals">
                                 <NewArrivals />
                             </Route>
+                            <Route path="/login">
+                                <Login />
+                            </Route>
                             <Route path="/">
                                 <Home />
                             </Route>
+                            
                         </Switch>
                     </Router>
                     <Footer />
