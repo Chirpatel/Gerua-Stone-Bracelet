@@ -155,7 +155,6 @@ function Login() {
                                 <tbody>
                                     {
                                         universalData.map((data, index) => {
-
                                             return <tr key={index}>
 
                                                 {// eslint-disable-next-line array-callback-return
