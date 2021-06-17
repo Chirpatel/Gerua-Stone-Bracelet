@@ -14,6 +14,10 @@ const menu =[
     {
         name: "Contact Us",
         url:"/contact"
+    },
+    {
+        name: "Login",
+        url: "/login"
     }
 ];
 
