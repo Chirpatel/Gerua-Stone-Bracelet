@@ -4,20 +4,20 @@ import {
     useEffect
 } from 'react'
 import Loader from '../Loader/Loader';
-import menu from './Heading';
-import {
-    Navbar,
-    Nav,
-    Form,
-    FormControl,
-    Button
-} from 'react-bootstrap';
+ import menu from './Heading';
+// import {
+//     Navbar,
+//     Nav,
+//     Form,
+//     FormControl,
+//     Button
+// } from 'react-bootstrap';
 import {
     BrowserRouter as Router,
     Switch,
     Route
 } from "react-router-dom";
-
+import CustomNavbar from './Navbar/Navbar';
 import Categories from '../Body/Categories/Categories'
 import ContactUs from '../Body/ContactUs/ContactUs'
 import Home from '../Body/Home/Home'
@@ -40,35 +40,19 @@ function Header() {
             {!Loading && 
                 <>
                     <Router>
-                        <Navbar sticky="top" bg="light" expand="lg">
-                            <Navbar.Brand href="/">Gerua Stone Bracelet</Navbar.Brand>
-                            <Navbar.Toggle aria-controls="basic-navbar-nav" />
-                            <Navbar.Collapse id="basic-navbar-nav">
-                                <Nav className="mr-auto">
-                                    {menu &&
-                                        menu.map((data,key) => {
-                                            return <Nav.Link key={key} href={data.url}>{data.name}</Nav.Link>
-                                        })
-                                    }
-                                </Nav>
-                                <Form inline>
-                                    <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-                                    <Button variant="outline-dark">Search</Button>
-                                </Form>
-                            </Navbar.Collapse>
-                        </Navbar>
+                        <CustomNavbar menu={menu}/>
                         <Switch>
                             <Route path="/categories">
-                                <Categories />
+                                <Categories/>
                             </Route>
                             <Route path="/contact">
-                                <ContactUs />
+                                <ContactUs/>
                             </Route>
                             <Route path="/newarrivals">
-                                <NewArrivals />
+                                <NewArrivals/>
                             </Route>
                             <Route path="/">
-                                <Home />
+                                <Home/>
                             </Route>
                         </Switch>
                     </Router>

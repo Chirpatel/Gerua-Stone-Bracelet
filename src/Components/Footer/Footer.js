@@ -3,7 +3,7 @@ import './Footer.css'
 function Footer() {
     return (
         <div>
-            <footer id="dk-footer" className="dk-footer">
+            {/* <footer id="dk-footer" className="dk-footer">
                 <div className="container">
                     <div className="row">
                         <div className="col-md-12 col-lg-4">
@@ -11,10 +11,8 @@ function Footer() {
                                 <a href="index.html" className="footer-logo">
                                     <img src="https://cdn.pixabay.com/photo/2016/11/07/13/04/yoga-1805784_960_720.png" alt="footer_logo" className="img-fluid" />
                                 </a>
-                                <p className="footer-info-text">
-                                    Reference site about Lorem Ipsum, giving information on its origins, as well as a random Lipsum generator.
-                        </p>
-                                <div className="footer-social-link">
+                                
+                                 <div className="footer-social-link">
                                     <h3>Follow us</h3>
                                     <ul>
                                         <li>
@@ -43,7 +41,7 @@ function Footer() {
                                             </a>
                                         </li>
                                     </ul>
-                                </div>
+                                </div> 
                             </div>
                             <div className="footer-awarad">
                                 <img src="images/icon/best.png" alt="" />
@@ -182,7 +180,35 @@ function Footer() {
                     </button>
                 </div>
 
-            </footer>
+            </footer> */}
+
+            <div className="footer">
+                <div className="footer-part1">
+                    <div className="footer-part1-details"><i class="fas fa-phone-alt"></i> +911234567890</div>
+                    <div className="footer-part1-details"><i class="fas fa-envelope"></i> abc@gmail.com</div>
+                    <div className="footer-part1-details"><i class="far fa-clock"></i> Working Hours</div>
+                </div>
+                <div className="footer-part2">
+                    <div className="footer-part2-company">
+                        <div className="footer-part2-logo">
+                            Gerua Agate
+                        </div>
+                        <div className="footer-part2-desp">
+                            We are a team of designers and developers that create high quality Magento, Prestashop, Opencart.
+                        </div>
+                        <div className="footer-part2-cont">
+                            Address 
+                        </div>
+                    </div>
+                    <div className="footer-part2-details">
+                        <div className="footer-part2-sign">SIGN UP FOR UPDATES</div>
+                        <div className="footer-part2-email">
+                            <input type="text" placeholder="Your email address"/>
+                            <div className="footer-part2-send"><i class="fas fa-paper-plane"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     )
 }

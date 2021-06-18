@@ -1,0 +1,9 @@
+.card{
+    border:none
+}
+.product:hover{
+    box-shadow: 0px 4px 20px grey;
+}
+.text-center img{
+    width: 75%;
+}

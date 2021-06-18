@@ -1,8 +1,8 @@
 import React from 'react'
-
+import "./ProductView.css"
 function ProductView({data}) {
     return (
-        <div className="col-md-4">
+        <div className="col-md-4 card">
             <div className="product py-4"> 
             {/* <span className="off bg-success">-25% OFF</span> */}
                 <div className="text-center"> <img alt="" src={data.src} width="200" /> </div>

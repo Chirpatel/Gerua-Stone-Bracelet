@@ -66,18 +66,8 @@ function NewArrivals() {
                 <div className="col-md-3">
                     <div className="t-products p-2">
                         <h6 className="text-uppercase">Categories</h6>
-                        <div className="p-lists">
-                        {categories &&
-                            Object.keys(categories).map((catg,key)=>{
-                                return <div key={key} className="d-flex justify-content-between mt-2"> <span>{catg}</span> <span>{categories[catg]}</span> </div>
-                            })
-                        }
-                        </div>
                     </div>
                     <div className="processor p-2">
-                        <div className="heading d-flex justify-content-between align-items-center">
-                            <h6 className="text-uppercase">Categories</h6> <span>--</span>
-                        </div>
                         {categories &&
                             Object.keys(categories).map((catg,key)=>{
                                 return (

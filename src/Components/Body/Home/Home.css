@@ -1,9 +1,11 @@
 .t-products {
-    background-color: #151414;
+    background-color: var(--color1);
     color: #fff;
     border-radius: 3px
 }
-
+.text-uppercase{
+    margin:0px;
+}
 .processor {
     background-color: #fff;
     margin-top: 5px;

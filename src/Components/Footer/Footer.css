@@ -1,4 +1,79 @@
+.footer{
+    background-color: black;
+    width: 100%;
+    color:white;
+    
+}
+.footer-part1{
+    display: flex;
+    font-size: 20px;
+}
+.footer-part1-details{
+    margin: 20px auto;
+}
 
+.footer-part2{
+    display:flex;
+}
+.footer-part2-container{
+    padding: 0px 10px;
+}
+.footer-part2-company{
+    width:300px;
+    margin: 20px;
+    text-align: center;
+}
+.footer-part2-details{
+    width:100%;
+}
+.footer-part2-email{
+    margin: 20px auto;
+    text-align: center;
+    position: relative;
+}
+.footer-part2-email input{
+    padding: 10px 10px 10px 10px;
+    height: 55px;
+    width: 75%;
+    z-index: 1;
+    color: #999;
+    background: white;
+    border: 1px solid #ebebeb;
+    font-size: 20px;
+}
+.footer-part2-send{
+    font-size: 24px;
+    display: inline-block;
+    width: 50px;
+    background: rgb(0, 162, 255);
+    padding: 10px;
+    height: 56px;
+}
+.footer-part2-sign{
+    width: calc(75% + 56px);
+    margin: 20px auto;
+    font-weight: bold;
+    font-size: 20px;
+}
+@media (max-width: 800px) {
+    .footer-part1,.footer-part2 {
+      flex-direction: column;
+    }
+    .footer-part2-company {
+        margin: 20px auto;
+    }
+  }
+
+
+
+
+
+
+
+
+
+
+/* 
 .footer-widget p {
     margin-bottom: 27px;
 }
@@ -78,7 +153,7 @@ p {
     border-left-color: #F7F9F8;
 }
 
-/* Animated heading border */
+
 @keyframes primary-short {
     0% {
         width: 15%;
@@ -318,11 +393,7 @@ p {
     cursor: pointer;
 }
 
-/* ==========================
 
-    Contact
-
-=============================*/
 .contact-us {
     position: relative;
     z-index: 2;
@@ -419,4 +490,4 @@ p {
 
 .dk-footer-form button[type=submit] {
     padding: 5px 24px 6px 17px;
-}
+} */
