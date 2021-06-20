@@ -26,6 +26,9 @@
 .footer-part2-details{
     width:100%;
 }
+.footer-part2-logo img{
+    width: 100px;
+}
 .footer-part2-email{
     margin: 20px auto;
     text-align: center;

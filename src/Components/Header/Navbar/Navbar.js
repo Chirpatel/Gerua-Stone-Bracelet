@@ -1,4 +1,5 @@
 import React from 'react'
+import {Link} from "react-router-dom";
 import "./Navbar.css";
 
 function Navbar({menu}) {
@@ -7,7 +8,7 @@ function Navbar({menu}) {
             <div className="navbar-part1">
                 <div className="navbar-part1-container">
                     <div className="navbar-part1-row">
-                        <div className="logo"> Gerua Agate </div>
+                        <div className="logo"> <img src="/main logo.png" alt="Gita Stone Logo"/> </div>
                         <div className="search"> <input type="text" placeholder="Search Product"/> <i className="fas fa-search fa-3x"></i> </div>
                     </div>
                 </div>
@@ -15,7 +16,7 @@ function Navbar({menu}) {
                     <div className="navbar-part1-row">
                         {menu &&
                             menu.map((data,index)=>{
-                                return <div key={index} className="href"> <a href={data.url}>{data.name}</a> </div>
+                                return <div key={index} className="href"> <Link to={data.url}>{data.name}</Link> </div>
                             })
                         }
                     </div>

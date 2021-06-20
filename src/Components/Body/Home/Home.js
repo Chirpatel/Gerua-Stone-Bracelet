@@ -2,7 +2,8 @@ import {React, useState,useEffect} from 'react'
 import ProductView from '../ProductView/ProductView'
 import getApi from '../../API/getApi'
 import './Home.css'
-
+require('dotenv').config()
+const url = process.env.REACT_APP_VERCEL_URL;
 function Home({setLoad}) {
     const [data,setData] = useState([]);
     const [universalData, setUniversalData] = useState([]);
@@ -41,7 +42,7 @@ function Home({setLoad}) {
     
     useEffect(() => {
         const pageData = async(page,pageSize) =>{
-            return await getApi(`https://gerua-api.vercel.app/data?page=${page}`);
+            return await getApi(`${url}/data?page=${page}`);
         }
         const dataPageCall = async (totalPage) =>{
             let page = 2;
@@ -55,7 +56,7 @@ function Home({setLoad}) {
             setCategory([...universalData, ...temp])
         }
         const dataCall = async () => {
-            let temp = await getApi("https://gerua-api.vercel.app/data");
+            let temp = await getApi(url+"/data");
             console.log(temp);
             setUniversalData(temp.data)
             setData(temp.data)

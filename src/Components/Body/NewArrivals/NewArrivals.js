@@ -2,6 +2,8 @@ import {React, useState,useEffect} from 'react'
 import ProductView from '../ProductView/ProductView'
 import getApi from '../../API/getApi'
 import '../Home/Home.css'
+require('dotenv').config()
+const url = process.env.REACT_APP_VERCEL_URL;
 
 function NewArrivals() {
     const [data,setData] = useState([]);
@@ -41,7 +43,7 @@ function NewArrivals() {
     
     useEffect(() => {
         const dataCall = async () => {
-            let temp = await getApi("https://gerua-api.vercel.app/data/newArrivals");
+            let temp = await getApi(url+"/data/newArrivals");
             console.log(temp);
             setUniversalData(temp.data)
             setData(temp.data)
