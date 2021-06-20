@@ -1,11 +1,38 @@
 .upload{
-    margin: 100px auto;
+    margin: 50px auto;
 }
 .products{
-    margin: 100px auto;
+    margin: 50px auto;
 }
-
+.products table{
+    margin: 20px auto;
+}
 .products table,.products table tr th,.products table tr td{
     border:1px solid black;
     padding:5px;
+}
+.upload-div{
+    margin: 10px auto;
+    width: 400px;
+}
+.upload-container input[type='text']{
+    width: 100%;
+}
+.upload-container label{
+    margin: 10px 5px 10px 0px;
+}
+.upload-container button{
+    margin: 10px;
+    width: calc(100% - 20px);
+    background-color: transparent;
+    border: 1px black solid;
+    color: black;
+}
+
+.upload-container button:hover{
+    background-color: var(--color1);
+}
+.upload-container button:active{
+    background-color: var(--color1);
+    font-size: 15px;
 }

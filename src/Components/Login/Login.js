@@ -76,15 +76,19 @@ function Login() {
     return (
         <>
             <div className="upload">
-                <h3>Add Product</h3>
-                <div>
-                    <input type="text" value={name} onChange={onNameChange} /><br />
-                    <input type="text" value={categories} onChange={onCategoriesChange} /><br />
-                    <input type="text" value={price} onChange={onPriceChange} /><br />
-                    <input type="file" onChange={onFileChange} /><br />
-                    <button onClick={onFileUpload}>
-                        Upload!
-                </button>
+                <div className="upload-div">
+                    <h3>Add Product</h3>
+                    <div className="upload-container">
+                        <label for="name">Name</label><br/>
+                        <input type="text" id="name" value={name} onChange={onNameChange} /><br />
+                        <label for="Category" >Category</label><br/>
+                        <input type="text"id="Category"  value={categories} onChange={onCategoriesChange} /><br />
+                        <label for="Price">Price</label><br/>
+                        <input type="text" id="Price" value={price} onChange={onPriceChange} /><br />
+                        <label for="Image">Choose Image</label>
+                        <input type="file" id ="Image"onChange={onFileChange} /><br />
+                        <button onClick={onFileUpload}>Upload!</button>
+                    </div>
                 </div>
             </div>
             <div className="products">
@@ -97,6 +101,7 @@ function Login() {
                                         if (!ignoreList.includes(col))
                                             return <th key={index}>{col}</th>
                                     })}
+                                    <th></th>
                             </tr>
                         </thead>
                         <tbody>
