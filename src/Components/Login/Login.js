@@ -2,6 +2,9 @@ import {React,useState,useEffect} from 'react'
 import postApi from '../API/postApi';
 import getApi from '../API/getApi'
 import './Login.css';
+require('dotenv').config()
+const url = process.env.REACT_APP_VERCEL_URL;
+const glitchurl = process.env.REACT_APP_GLITCH_URL;
 function Login() {
     const [selectedFile, setSelectedFile] = useState({});
     const [name, setName] = useState("");
@@ -12,7 +15,7 @@ function Login() {
 
     useEffect(() => {
         const pageData = async (page, pageSize) => {
-            return await getApi(`https://gerua-api.vercel.app/data?page=${page}`);
+            return await getApi(`${url}/data?page=${page}`);
         }
         const dataPageCall = async (totalPage) => {
             let page = 2;
@@ -24,7 +27,7 @@ function Login() {
             setUniversalData((prevState) => { console.log(prevState); return [...prevState, ...temp] })
         }
         const dataCall = async () => {
-            let temp = await getApi("https://gerua-api.vercel.app/data");
+            let temp = await getApi(url+"/data");
             console.log(temp);
             setUniversalData(temp.data)
             if (temp.page < temp.totalPage) {
@@ -56,7 +59,7 @@ function Login() {
         console.log(selectedFile);
         let config = {
             method: 'post',
-            url: `https://flaxen-inconclusive-owner.glitch.me/image/save?name=${name}&categories=${categories}&price=${price}`,
+            url: glitchurl+`/image/save?name=${name}&categories=${categories}&price=${price}`,
             headers: {
                 ...formData.headers
             },
@@ -66,7 +69,7 @@ function Login() {
         setReloadTable(!reloadTable);
     };
     const removeProd = async (id) => {
-        console.log(await getApi("https://flaxen-inconclusive-owner.glitch.me/imageRemove?id=" + id));
+        console.log(await getApi(glitchurl+"/imageRemove?id=" + id));
         setReloadTable(!reloadTable);
     }
     const ignoreList = ["images"]
