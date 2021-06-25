@@ -98,3 +98,7 @@ button:active {
     justify-content: center;
     color: #fff
 }
+
+.card > * {
+    margin: 5px;
+}

@@ -1,12 +1,14 @@
 import {React, useState,useEffect} from 'react'
 import ProductView from '../ProductView/ProductView'
 import getApi from '../../API/getApi'
+import Loading from '../../Loading/Loading'
 import '../Home/Home.css'
 require('dotenv').config()
 const url = process.env.REACT_APP_VERCEL_URL;
 
 function NewArrivals() {
     const [data,setData] = useState([]);
+    const [dataLoading, setDataLoading] = useState(true);
     const [universalData, setUniversalData] = useState([]);
     const [categories,setCategories] = useState({});
     const [filterCatg, setFilterCatg] = useState({});
@@ -48,6 +50,7 @@ function NewArrivals() {
             setUniversalData(temp.data)
             setData(temp.data)
             setCategory(temp.data)
+            setDataLoading(false);
         }
         dataCall();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -62,7 +65,7 @@ function NewArrivals() {
 
 
     return (
-        
+        <>
         <div className="container-fluid mt-5 mb-5">
                 <div className="row g-2">
                 <div className="col-md-3">
@@ -70,6 +73,11 @@ function NewArrivals() {
                         <h6 className="text-uppercase">Categories</h6>
                     </div>
                     <div className="processor p-2">
+                    {dataLoading &&
+                                <div style={{ width: "100%", textAlign: "center"}}>
+                                    <Loading height={32} width={32}/>
+                                </div>
+                            }
                         {categories &&
                             Object.keys(categories).map((catg,key)=>{
                                 return (
@@ -93,6 +101,12 @@ function NewArrivals() {
                 </div>
             </div>
         </div>
+        {dataLoading &&
+            <div style={{ width: "100%", textAlign: "center", margin: "10px" }}>
+                <Loading />
+            </div>
+        }
+        </>
     )
 }
 
