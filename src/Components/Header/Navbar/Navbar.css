@@ -54,14 +54,44 @@
     color:black;
     cursor: pointer;
 }
+.topnav {
+    overflow: hidden;
+    background-color:transparent;
+    position: relative;
+    color:black;
+    border-bottom: 3px solid black;
+  }
+  
+  .topnav .icon {
+    display: block;
+    position: absolute;
+    right: 40px;
+    top: 0;
+    width: 15px;
+    height: 52.8px;
+    font-size: 30px;
+    text-decoration: none;
+    animation: none;
+    border: none;
+    background-color: transparent;
+  }
+  
 @media (max-width: 800px) {
+    .logo{
+        margin: 5px 20px;
+    }
     .navbar-part1-row,.navbar-part2-row {
       flex-direction: column;
     }
     .href{
         margin: 5px auto;
     }
-    .logo{
-        text-align: center;
+    .href-toggle{
+        padding: 10px 10px;
     }
+  }
+  @media (max-width: 400px){
+  .logo img {
+    width: 80%;
+}
   }

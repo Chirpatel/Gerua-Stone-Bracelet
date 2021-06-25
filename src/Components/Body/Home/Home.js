@@ -11,6 +11,7 @@ function Home({setLoad}) {
     const [universalData, setUniversalData] = useState([]);
     const [categories,setCategories] = useState({});
     const [filterCatg, setFilterCatg] = useState({});
+    const [screenWidth, setScreenWidth] = useState(window.innerWidth)
 
     const setCategory = (data) =>{
         let cat = {};
@@ -78,33 +79,48 @@ function Home({setLoad}) {
         setFilterCatg({...filterCatg, ...tempcatg})
         filterData({...filterCatg, ...tempcatg})
     }
+    useEffect(() => {
 
+        const changeWidth = () => {
+            setScreenWidth(window.innerWidth);
+          }
+          window.addEventListener('resize', changeWidth)
+
+        return () => {
+            window.removeEventListener('resize', changeWidth)
+        }
+
+    },[])
 
     return (
         <>
+            <div className="title">Our Products</div>
             <div className="container-fluid mt-5 mb-5">
+
                 <div className="row g-2">
-                    <div className="col-md-3">
-                        <div className="t-products p-2">
-                            <h6 className="text-uppercase">Categories</h6>
+                    {screenWidth > 800 &&
+                        <div className="col-md-3">
+                            <div className="t-products p-2">
+                                <h6 className="text-uppercase">Categories</h6>
+                            </div>
+                            <div className="processor p-2">
+                                {dataLoading &&
+                                    <div style={{ width: "100%", textAlign: "center" }}>
+                                        <Loading height={32} width={32} />
+                                    </div>
+                                }
+                                {categories &&
+                                    Object.keys(categories).map((catg, key) => {
+                                        return (
+                                            <div key={key} className="d-flex justify-content-between mt-2">
+                                                <div className="form-check"> <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" onChange={() => { addChecked(catg) }} defaultChecked={filterCatg[catg]} /> <label className="form-check-label" htmlFor="flexCheckDefault"> {catg} </label> </div> <span>{categories[catg]}</span>
+                                            </div>
+                                        )
+                                    })
+                                }
+                            </div>
                         </div>
-                        <div className="processor p-2">
-                            {dataLoading &&
-                                <div style={{ width: "100%", textAlign: "center"}}>
-                                    <Loading height={32} width={32}/>
-                                </div>
-                            }
-                            {categories &&
-                                Object.keys(categories).map((catg, key) => {
-                                    return (
-                                        <div key={key} className="d-flex justify-content-between mt-2">
-                                            <div className="form-check"> <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" onChange={() => { addChecked(catg) }} defaultChecked={filterCatg[catg]} /> <label className="form-check-label" htmlFor="flexCheckDefault"> {catg} </label> </div> <span>{categories[catg]}</span>
-                                        </div>
-                                    )
-                                })
-                            }
-                        </div>
-                    </div>
+                    }
                     <div className="col-md-9">
                         <div className="row g-2">
                             {data && data.map((prod, index) => {

@@ -4,14 +4,7 @@ import {
     useEffect
 } from 'react'
 import Loader from '../Loader/Loader';
- import menu from './Heading';
-// import {
-//     Navbar,
-//     Nav,
-//     Form,
-//     FormControl,
-//     Button
-// } from 'react-bootstrap';
+import menu from './Heading';
 import {
     BrowserRouter as Router,
     Switch,
@@ -39,8 +32,8 @@ function Header() {
             }
             {!Loading && 
                 <>
-                    <Router>
-                        <CustomNavbar menu={menu}/>
+                <Router>
+                    <CustomNavbar menu={menu} />
                         <Switch>
                             <Route path="/categories">
                                 <Categories/>
