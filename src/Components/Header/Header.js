@@ -55,15 +55,12 @@ function Header() {
                             <Route path="/login">
                                 <Login />
                             </Route>
-<<<<<<< HEAD
                             <Route path="/login">
                                 <Login />
                             </Route>
                             <Route path="/login">
                                 <Login />
                             </Route>
-=======
->>>>>>> 580d019b23d9ecb8d073ac3a377913053b740468
                             <Route path="/">
                                 <Home/>
                             </Route>
