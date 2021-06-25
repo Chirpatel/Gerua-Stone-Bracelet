@@ -41,7 +41,6 @@ function Login() {
         const dataCall = async () => {
             setTableLoading(true)
             let temp = await getApi(url+"/data");
-            console.log(temp);
             setUniversalData(temp.data)
             if (temp.page < temp.totalPage) {
                 dataPageCall(temp.totalPage);
@@ -65,7 +64,6 @@ function Login() {
     }
     const onFileChange = event => {
         setProductSucess(false);
-        console.log(event.target.files[0])
         setSelectedFile(event.target.files[0]);
     };
     const onFileUpload = async () => {
