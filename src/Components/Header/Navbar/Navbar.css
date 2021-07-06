@@ -5,17 +5,12 @@
     display: flex;
 }
 .logo{
-    margin: auto 0px auto 20px;
+    margin: auto 20px;
 }
 .logo img{
     width: 300px;
 }
-.klogo{
-    margin: auto 20px auto 0px;
-}
-.klogo img{
-    width: 55px;
-}
+
 .search{
     width: 75%;
     margin: 20px auto;
@@ -85,9 +80,6 @@
     .logo{
         margin: 5px 20px;
     }
-    .klogo{
-        width:15% !important;
-    }
     .navbar-part1-row,.navbar-part2-row {
       flex-direction: column;
     }
@@ -98,11 +90,8 @@
         padding: 10px 10px;
     }
   }
-  @media (max-width: 500px){
+  @media (max-width: 400px){
   .logo img {
-    width: 75%;
-}
-.klogo{
-    width:15%;
+    width: 80%;
 }
   }
