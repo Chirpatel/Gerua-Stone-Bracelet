@@ -29,7 +29,8 @@ function Navbar({menu}) {
                     <div className="navbar-part1">
                         <div className="navbar-part1-container">
                             <div className="navbar-part1-row">
-                                <div className="logo"> <img src="/main logo.png" alt="Gita Stone Logo" /> </div>
+                                <div className="logo"><a href="/"><img src="/main logo.png" alt="Gita Stone Logo" /></a></div>
+                                <div className="klogo"><a href="/"><img src="/kimage.jpeg" alt="Krisha Logo" /></a></div>
                                 <div className="search"> <input type="text" placeholder="Search Product" /> <i className="fas fa-search fa-3x"></i> </div>
                             </div>
                         </div>
@@ -49,7 +50,7 @@ function Navbar({menu}) {
 
                 {screenWidth <= 800 &&
                     <div class="topnav">
-                        <div className="logo"> <img src="/main logo.png" alt="Gita Stone Logo" /> </div>
+                        <div className="logo"> <a href="/"><img src="/main logo.png" alt="Gita Stone Logo" /> <img className="klogo" src="/kimage.jpeg" alt="Krisha Logo" /></a> </div>
                         {toggleMenu &&
                             <div id="myLinks">
                                 {menu &&

@@ -6,7 +6,7 @@ function Footer() {
             <div className="footer">
                 <div className="footer-part1">
                     <div className="footer-part1-details"><i class="fas fa-phone-alt"></i> +919426240792</div>
-                    <div className="footer-part1-details"><i class="fas fa-envelope"></i> gopientriprise23@yahoo.com</div>
+                    <div className="footer-part1-details"><i class="fas fa-envelope"></i> gopienterpries23@yahoo.com</div>
                     <div className="footer-part1-details"><i class="far fa-clock"></i> Mon-Sat 9:00AM-8:00PM</div>
                 </div>
                 <div className="footer-part2">
@@ -14,14 +14,17 @@ function Footer() {
                         <div className="footer-part2-logo">
                             <img src="/logo.png" alt="Logo"/>
                         </div>
-                        <div className="footer-part2-desp">
-                            We are dedicated to develop amazing bracelets.
-                        </div>
+                        
                         <div className="footer-part2-cont">
-                            Gopi Enterprise, Morbi. 
+                        <b>Gopi Enterprise</b><br/>
+                        C/o. Gopi steel, Sardar Road, Morbi, Gujarat, India-363641.
                         </div>
+                        
                     </div>
                     <div className="footer-part2-details">
+                    <div className="footer-part2-desp">
+                            We are dedicated to develop amazing bracelets.
+                        </div>
                         <div className="footer-part2-sign">SIGN UP FOR UPDATES</div>
                         <div className="footer-part2-email">
                             <input type="text" placeholder="Your email address"/>

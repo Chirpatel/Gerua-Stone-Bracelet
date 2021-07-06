@@ -58,12 +58,19 @@
     font-weight: bold;
     font-size: 20px;
 }
+.footer-part2-desp{
+    width: calc(75% + 56px);
+    margin: 20px auto;
+}
 @media (max-width: 800px) {
     .footer-part1,.footer-part2 {
       flex-direction: column;
     }
     .footer-part2-company {
         margin: 20px auto;
+    }
+    .footer-part1{
+        font-size: 15px;
     }
   }
 
